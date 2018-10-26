@@ -1,0 +1,50 @@
+plugins {
+    id "java"
+    id "application"
+    id "idea" // I use IntelliJ IDEA
+    id "jacoco" // for code coverage reports
+}
+
+mainClassName = 'com.zikovam.StartApplication'
+
+group 'com.zikovam.restMoneyTransferTestWithoutSpring'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    manifest {
+        attributes "Main-Class": "$mainClassName"
+    }
+}
+
+dependencies {
+    compile 'org.slf4j:slf4j-log4j12:1.7.+' // for logging
+    compile 'org.projectlombok:lombok:1.+'  // utilities for POJOs
+
+    compile 'com.fasterxml.jackson.module:jackson-module-parameter-names:2.8.0'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.8.0'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.8.0'
+    compile 'com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.8.0'
+
+    compile 'org.glassfish.grizzly:grizzly-http-server:2.+'
+    compile 'org.glassfish.jersey.containers:jersey-container-grizzly2-http:2.+'
+    compile 'org.glassfish.jersey.containers:jersey-container-grizzly2-servlet:2.+'
+    compile 'org.glassfish.jersey.inject:jersey-hk2:2.26'
+    compile 'org.glassfish.jersey.media:jersey-media-json-jackson:2.23.2'
+
+    compile 'org.glassfish.hk2:hk2-metadata-generator:2.+'
+    
+    compile 'org.hibernate:hibernate-core:5.2.6.Final'
+    compile 'com.h2database:h2:1.4.196'
+
+    testCompile 'junit:junit:4.+' // unit testing framework
+}
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs << '-parameters'
+}
