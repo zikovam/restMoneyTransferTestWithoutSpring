@@ -43,7 +43,7 @@ public class UserDaoImpl implements UserDao {
                 setParameter("username",username).list();
 
         tx1.commit();
-        return users.get(0);
+        return users.isEmpty() ? null : users.get(0);
     }
 
     @Override

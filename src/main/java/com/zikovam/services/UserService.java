@@ -52,7 +52,7 @@ public class UserService {
             usersDao.createUser(user);
 
             return Response
-                    .status(Response.Status.OK)
+                    .status(Response.Status.CREATED)
                     .entity(SUCCESS)
                     .build();
         }
@@ -110,7 +110,6 @@ public class UserService {
     }
 
     @GET
-    @Path ("getAllUsers")
     @Produces (MediaType.APPLICATION_JSON)
     public Response findAllUsers () {
         List<String> users = new ArrayList<>();

@@ -22,14 +22,14 @@ import java.util.List;
 @Slf4j
 public class StartApplication {
     // Base URI the Grizzly HTTP server will listen on
-    private static final String BASE_URI = "http://localhost:8080/api";
+    public static final String BASE_URI = "http://localhost:8080/api";
 
     /**
      * Starts Grizzly HTTP server exposing JAX-RS resources defined in this application.
      *
      * @return Grizzly HTTP server.
      */
-    private static HttpServer startServer () {
+    public static HttpServer startServer () {
         // create a resource config that scans for JAX-RS resources and providers
         // in com.example.rest package
         final ResourceConfig rc = new ResourceConfig().packages("com.zikovam.services.");
@@ -39,11 +39,11 @@ public class StartApplication {
         return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
     }
 
-    private static void fillingDatabase () {
+    public static void fillingDatabase () {
         User user1 = new User("Elon Musk");
         User user2 = new User("Bear Grills");
 
-        Account account1 = new Account(user1,2000);
+        Account account1 = new Account(user1, 2000);
         Account account2 = new Account(user1, 5000);
         List<Account> accountList1 = new ArrayList<>();
         accountList1.add(account1);
