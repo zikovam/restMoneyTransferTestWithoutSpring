@@ -48,6 +48,9 @@ public class TransferService {
                     currentSum = accountToEntity.getBalance();
                     accountToEntity.setBalance(currentSum + moneyTransferAmount);
 
+                    accountDao.updateAccount(accountFromEntity);
+                    accountDao.updateAccount(accountToEntity);
+
                     return Response.status(Response.Status.OK)
                             .entity(Arrays.asList(accountFromEntity.toString(),accountToEntity.toString()))
                             .build();

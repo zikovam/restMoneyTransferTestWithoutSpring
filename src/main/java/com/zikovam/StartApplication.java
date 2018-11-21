@@ -22,7 +22,7 @@ import java.util.List;
 @Slf4j
 public class StartApplication {
     // Base URI the Grizzly HTTP server will listen on
-    public static final String BASE_URI = "http://localhost:8080/api";
+    private static final String BASE_URI = "http://localhost:8080/api";
 
     /**
      * Starts Grizzly HTTP server exposing JAX-RS resources defined in this application.

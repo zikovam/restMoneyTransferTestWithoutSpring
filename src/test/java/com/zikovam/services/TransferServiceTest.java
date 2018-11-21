@@ -1,6 +1,9 @@
 package com.zikovam.services;
 
 import com.zikovam.StartApplication;
+import com.zikovam.dao.AccountDao;
+import com.zikovam.dao.AccountDaoImpl;
+import com.zikovam.entity.Account;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpPost;
@@ -33,10 +36,11 @@ public class TransferServiceTest {
     }
 
     @Test
-    public void givenPostTransfer_whenCorrectRequest_thenResponseCodeSuccess () throws IOException {
+    public void givenPostTransfer_whenCorrectRequest_thenResponseCodeSuccess_andBalanceChanged () throws IOException {
 
         String userFrom = "Elon%20Musk";
         String accountIdFrom = "1";
+        AccountDao accountDao = new AccountDaoImpl();
         String userTo = "Bear%20Grills";
         String accountIdTo = "3";
         String sum = "1000";
@@ -48,6 +52,13 @@ public class TransferServiceTest {
 
         final HttpResponse httpResponse = HttpClientBuilder.create().build().execute(request);
 
+        Account account = accountDao.getAccountById(1);
+        Long balanceFromAfterTransaction = account.getBalance();
+        account = accountDao.getAccountById(3);
+        Long balanceToAfterTransaction = account.getBalance();
+
         assertEquals(HttpStatus.SC_OK, httpResponse.getStatusLine().getStatusCode());
+        assertEquals(1000, (long) balanceFromAfterTransaction);
+        assertEquals(10000, (long) balanceToAfterTransaction);
     }
 }

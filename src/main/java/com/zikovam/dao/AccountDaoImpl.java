@@ -32,7 +32,7 @@ public class AccountDaoImpl implements AccountDao {
     public void updateAccount (Account account) {
         Session session = HibernateSessionFactoryUtil.getSession();
         Transaction tx1 = session.beginTransaction();
-        session.update(account);
+        session.saveOrUpdate(account);
         tx1.commit();
     }
 }
